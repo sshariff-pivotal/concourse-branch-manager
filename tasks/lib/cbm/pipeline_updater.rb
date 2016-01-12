@@ -30,7 +30,7 @@ module Cbm
       process(generate_set_pipeline_cmd, timeout: 5, input_lines: %w(y))
 
       log 'Unpausing pipeline...'
-      unpause_pipeline_cmd = "#{fly_path} --target=concourse unpause-pipeline " \
+      unpause_pipeline_cmd = "#{fly_path} --target=10.244.8.2:8080 unpause-pipeline " \
         "--pipeline=#{pipeline_name}"
       process(unpause_pipeline_cmd, timeout: 5)
     end
@@ -41,7 +41,7 @@ module Cbm
       load_vars_from_options = load_vars_from_entries.reduce('') do |options, entry|
         "#{options}--load-vars-from=#{entry} "
       end.strip
-      "#{fly_path} --target=local set-pipeline --config=#{pipeline_file} " \
+      "#{fly_path} --target=10.244.8.2:8080 set-pipeline --config=#{pipeline_file} " \
         "--pipeline=#{pipeline_name} #{load_vars_from_options}"
     end
 
