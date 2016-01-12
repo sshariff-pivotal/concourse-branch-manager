@@ -41,7 +41,7 @@ module Cbm
       load_vars_from_options = load_vars_from_entries.reduce('') do |options, entry|
         "#{options}--load-vars-from=#{entry} "
       end.strip
-      "#{fly_path} --target=concourse set-pipeline --config=#{pipeline_file} " \
+      "#{fly_path} --target=local set-pipeline --config=#{pipeline_file} " \
         "--pipeline=#{pipeline_name} #{load_vars_from_options}"
     end
 
