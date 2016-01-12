@@ -26,12 +26,6 @@ module Cbm
     def set_pipeline
       download_fly
 
-      log 'Logging into concourse...'
-      process(
-        "#{fly_path} --target=concourse login --concourse-url=#{url}",
-        timeout: 5,
-        input_lines: [username, password])
-
       log 'Updating pipeline...'
       process(generate_set_pipeline_cmd, timeout: 5, input_lines: %w(y))
 
